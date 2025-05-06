@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4521630424306496346}
   - component: {fileID: 6248704354360780010}
   - component: {fileID: 7644182920088485926}
-  - component: {fileID: 6410995098636922886}
+  - component: {fileID: 4344597238181929110}
   m_Layer: 0
   m_Name: NetworkRunnerPrefab
   m_TagString: Untagged
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsSceneTakeOverEnabled: 1
   LogSceneLoadErrors: 1
---- !u!114 &6410995098636922886
+--- !u!114 &4344597238181929110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,7 +156,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8240768414475387868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10533623ed629624c8acc6869f609bf2, type: 3}
+  m_Script: {fileID: 11500000, guid: 05ab2a17ee930d8498a04f44cb3c0c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DelayIfSceneManagerIsBusy: 1
+  delayIfSceneManagerIsBusy: 1
+  maxPoolCount: 20

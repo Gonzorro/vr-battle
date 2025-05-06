@@ -31,15 +31,15 @@ public class ConnectionManager : MonoBehaviour
         activeRunnerInstance = Instantiate(networkRunnerPrefab);
     }
 
-    private void OnRunnersReady(NetworkRunner runner, NetworkSceneManagerDefault sceneManager)
+    private void OnRunnersReady(NetworkRunner runner, NetworkSceneManagerDefault sceneManager, INetworkObjectProvider provider)
     {
         if (runner == null || isConnected) return;
 
         networkRunner = runner;
-        StartGame(sceneManager);
+        StartGame(sceneManager, provider);
     }
 
-    private async void StartGame(NetworkSceneManagerDefault sceneManager)
+    private async void StartGame(NetworkSceneManagerDefault sceneManager, INetworkObjectProvider provider)
     {
         if (!TryGetSceneRef(out var sceneRef))
         {
@@ -53,7 +53,8 @@ public class ConnectionManager : MonoBehaviour
             Scene = sceneRef,
             SessionName = roomName,
             PlayerCount = 10,
-            SceneManager = sceneManager
+            SceneManager = sceneManager,
+            ObjectProvider = provider
         });
 
         if (!result.Ok)

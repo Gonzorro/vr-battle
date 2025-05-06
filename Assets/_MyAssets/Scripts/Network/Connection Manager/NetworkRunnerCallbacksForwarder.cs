@@ -15,7 +15,7 @@ public class NetworkRunnerCallbacksForwarder : MonoBehaviour, INetworkRunnerCall
 
     private void OnDestroy() => networkRunnerChannel.OnRunnersChanged -= OnRunnersChanged;
 
-    private void OnRunnersChanged(NetworkRunner runner, NetworkSceneManagerDefault sceneManager)
+    private void OnRunnersChanged(NetworkRunner runner, NetworkSceneManagerDefault sceneManager, INetworkObjectProvider provider)
     {
         NetworkRunner = runner; 
         NetworkRunner.AddCallbacks(this);

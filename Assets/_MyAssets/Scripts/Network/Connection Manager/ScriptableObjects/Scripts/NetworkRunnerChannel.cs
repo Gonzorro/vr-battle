@@ -10,18 +10,18 @@ public class NetworkRunnerChannel : ScriptableObject
     [SerializeField] private NetworkEvents networkEvents;
     [SerializeField] private NetworkSceneManagerDefault networkSceneManager;
 
-    public event Action<NetworkRunner, NetworkSceneManagerDefault> OnRunnersChanged;
+    public event Action<NetworkRunner, NetworkSceneManagerDefault, INetworkObjectProvider> OnRunnersChanged;
     public event Action<NetworkRunner, PlayerRef> OnPlayerJoined;
     public event Action<NetworkRunner, PlayerRef> OnPlayerLeft;
     public event Action<NetworkRunner> OnConnectedToServer;
     public event Action<NetworkRunner, NetDisconnectReason> OnDisconnectedFromServer;
     public event Action<NetworkRunner, ShutdownReason> OnServerShutdown;
 
-    public void UpdateRunners(NetworkRunner runner, NetworkSceneManagerDefault sceneManager)
+    public void UpdateRunners(NetworkRunner runner, NetworkSceneManagerDefault sceneManager, INetworkObjectProvider provider)
     {
         networkRunner = runner;
         networkSceneManager = sceneManager;
-        OnRunnersChanged?.Invoke(networkRunner, networkSceneManager);
+        OnRunnersChanged?.Invoke(networkRunner, networkSceneManager, provider);
     }
 
     public void InvokePlayerJoined(NetworkRunner runner, PlayerRef player) =>
