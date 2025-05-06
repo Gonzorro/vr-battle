@@ -1091,6 +1091,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430285556780473521}
   - component: {fileID: 430285556780473522}
+  - component: {fileID: 430285556780473523}
   m_Layer: 8
   m_Name: LeftHand Controller
   m_TagString: Untagged
@@ -1250,6 +1251,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_PhysicsTriggerInteraction: 1
+--- !u!114 &430285556780473523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430285556780473520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Device: 1
+  m_PoseSource: 4
+  m_PoseProviderComponent: {fileID: 0}
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_UseRelativeTransform: 0
 --- !u!54 &430285557076435628
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1358,6 +1377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430285557170928955}
   - component: {fileID: 430285557170928956}
+  - component: {fileID: 430285557170928957}
   m_Layer: 8
   m_Name: Gorilla Rig
   m_TagString: Untagged
@@ -1400,6 +1420,21 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 430285557076435665}
   m_RequestedTrackingOriginMode: 2
   m_CameraYOffset: 1.1176
+--- !u!114 &430285557170928957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430285557170928953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87aeebb9842b8543b5484a755fc38f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnInput: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  turnAmount: 45
+  debounceTime: 0.5
 --- !u!1 &430285557497225026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,6 +1445,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430285557497225027}
   - component: {fileID: 430285557497225028}
+  - component: {fileID: 430285557497225029}
   m_Layer: 8
   m_Name: RightHand Controller
   m_TagString: Untagged
@@ -1569,6 +1605,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_PhysicsTriggerInteraction: 1
+--- !u!114 &430285557497225029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430285557497225026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Device: 1
+  m_PoseSource: 5
+  m_PoseProviderComponent: {fileID: 0}
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_UseRelativeTransform: 0
 --- !u!20 &430285557564599316
 Camera:
   m_ObjectHideFlags: 0
