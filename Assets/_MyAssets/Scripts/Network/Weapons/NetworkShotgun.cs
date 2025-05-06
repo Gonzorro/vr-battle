@@ -1,7 +1,8 @@
+using Fusion;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class NetworkRevolver : NetworkGunBase
+public class NetworkShotgun : NetworkGunBase
 {
     private int currentAmmo;
 
@@ -19,19 +20,20 @@ public class NetworkRevolver : NetworkGunBase
 
     private void TryFire()
     {
-        if (Time.time - lastFireTime < fireDelay || currentAmmo <= 0)
-            return;
+        if (Time.time - lastFireTime < fireDelay || currentAmmo <= 0) return;
 
         lastFireTime = Time.time;
         currentAmmo--;
-
-        Fire();
+        RPC_Fire();
     }
 
-    private void Fire()
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    private void RPC_Fire()
     {
-        var projectile = Runner.Spawn(projectilePrefab, firePoint.position, firePoint.rotation);
-        if (projectile.TryGetComponent<Rigidbody>(out var rb))
+        if (firePoint == null || projectilePrefab == null) return;
+
+        var shell = Runner.Spawn(projectilePrefab, firePoint.position, firePoint.rotation);
+        if (shell.TryGetComponent<Rigidbody>(out var rb))
             rb.linearVelocity = firePoint.forward * projectileSpeed;
     }
 }

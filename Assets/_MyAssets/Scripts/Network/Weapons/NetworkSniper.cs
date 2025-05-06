@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class NetworkRevolver : NetworkGunBase
+public class NetworkSniper : NetworkGunBase
 {
     private int currentAmmo;
 
@@ -19,12 +19,10 @@ public class NetworkRevolver : NetworkGunBase
 
     private void TryFire()
     {
-        if (Time.time - lastFireTime < fireDelay || currentAmmo <= 0)
-            return;
+        if (Time.time - lastFireTime < fireDelay || currentAmmo <= 0) return;
 
         lastFireTime = Time.time;
         currentAmmo--;
-
         Fire();
     }
 

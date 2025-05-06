@@ -11,8 +11,6 @@ public class NetworkGunBase : NetworkBehaviour
     [SerializeField] protected int maxAmmo;
     [SerializeField] protected float fireDelay = 0.5f;
     [SerializeField] protected float projectileSpeed = 25f;
-    [SerializeField] protected bool isAutomatic = false;
-    [SerializeField] protected bool usePhysicsForce = true;
 
     protected float lastFireTime;
 
