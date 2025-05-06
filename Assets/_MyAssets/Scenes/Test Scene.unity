@@ -131,6 +131,8 @@ GameObject:
   - component: {fileID: 121261474}
   - component: {fileID: 121261473}
   - component: {fileID: 121261476}
+  - component: {fileID: 121261479}
+  - component: {fileID: 121261478}
   - component: {fileID: 121261477}
   m_Layer: 6
   m_Name: Gun
@@ -335,11 +337,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 121261471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795fd343b7af23841ae1107b43dea846, type: 3}
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputA: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  inputB: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 0
+  DisableSharedModeInterpolation: 1
+--- !u!114 &121261478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121261471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2083317898
+  ObjectInterest: 1
+  Flags: 524289
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 121261479}
+  - {fileID: 121261477}
+  ForceRemoteRenderTimeframe: 0
+--- !u!114 &121261479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121261471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5204c8d2e4bf72c4a8baed09fc090f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &138452003
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,7 +996,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1217759339
 MonoBehaviour:
   m_ObjectHideFlags: 0
