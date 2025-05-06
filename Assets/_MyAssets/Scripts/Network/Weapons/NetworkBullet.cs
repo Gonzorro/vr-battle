@@ -3,19 +3,20 @@ using UnityEngine;
 
 public class NetworkBullet : NetworkBehaviour
 {
-    [SerializeField] private float lifeTime = 5f;
+    [SerializeField] private float lifeTime = 3f;
     [SerializeField] private float damage = 10f;
 
     private float despawnTime;
-
+    private bool isReady;
     public override void Spawned()
     {
         despawnTime = Time.time + lifeTime;
+        isReady = true;
     }
 
     private void Update()
     {
-        if (Time.time >= despawnTime && Object.HasStateAuthority)
+        if (isReady && Time.time >= despawnTime && Object.HasStateAuthority)
             Runner.Despawn(Object);
     }
 

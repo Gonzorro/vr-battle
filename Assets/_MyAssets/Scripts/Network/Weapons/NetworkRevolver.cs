@@ -1,34 +1,8 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class NetworkRevolver : NetworkGunBase
 {
-    private int currentAmmo;
-
-    protected override void OnGrabbed(SelectEnterEventArgs args)
-    {
-        base.OnGrabbed(args);
-        currentAmmo = maxAmmo;
-    }
-
-    protected override void OnActivated(ActivateEventArgs args)
-    {
-        base.OnActivated(args);
-        TryFire();
-    }
-
-    private void TryFire()
-    {
-        if (Time.time - lastFireTime < fireDelay || currentAmmo <= 0)
-            return;
-
-        lastFireTime = Time.time;
-        currentAmmo--;
-
-        Fire();
-    }
-
-    private void Fire()
+    protected override void Fire()
     {
         var projectile = Runner.Spawn(projectilePrefab, firePoint.position, firePoint.rotation);
         if (projectile.TryGetComponent<Rigidbody>(out var rb))

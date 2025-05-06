@@ -1,3 +1,4 @@
+using System;
 using Fusion;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -10,16 +11,24 @@ public class NetworkGunBase : NetworkBehaviour
     [SerializeField] protected NetworkObject projectilePrefab;
     [SerializeField] protected int maxAmmo;
     [SerializeField] protected float fireDelay = 0.5f;
+    [SerializeField] protected float reloadTime = 1f;
     [SerializeField] protected float projectileSpeed = 25f;
 
     protected float lastFireTime;
+    private bool isReloading;
+
+    [Networked] protected int CurrentAmmo { get; set; }
 
     private XRGrabInteractable grabInteractable;
+    public event Action<float> OnReloading;
 
     private void Awake() => grabInteractable = GetComponent<XRGrabInteractable>();
 
     public override void Spawned()
     {
+        if (Object.HasStateAuthority)
+            CurrentAmmo = maxAmmo;
+
         grabInteractable.selectEntered.AddListener(OnGrabbed);
         grabInteractable.selectExited.AddListener(OnReleased);
         grabInteractable.activated.AddListener(OnActivated);
@@ -34,11 +43,51 @@ public class NetworkGunBase : NetworkBehaviour
         grabInteractable.deactivated.RemoveListener(OnDeactivated);
     }
 
-    protected virtual void OnGrabbed(SelectEnterEventArgs args) { }
+    protected virtual void OnGrabbed(SelectEnterEventArgs args) => Debug.Log($"[NetworkGunBase] Grabbed by {args.interactorObject}");
+    protected virtual void OnReleased(SelectExitEventArgs args) => Debug.Log($"[NetworkGunBase] Released by {args.interactorObject}");
+    protected virtual void OnActivated(ActivateEventArgs args)
+    {
+        Debug.Log($"[NetworkGunBase] Activated by {args.interactorObject}");
+        TryFire();
+    }
 
-    protected virtual void OnReleased(SelectExitEventArgs args) { }
+    protected virtual void OnDeactivated(DeactivateEventArgs args) => Debug.Log($"[NetworkGunBase] Deactivated by {args.interactorObject}");
 
-    protected virtual void OnActivated(ActivateEventArgs args) { }
+    protected void TryFire()
+    {
+        if (isReloading || Time.time - lastFireTime < fireDelay || CurrentAmmo <= 0) return;
 
-    protected virtual void OnDeactivated(DeactivateEventArgs args) { }
+        lastFireTime = Time.time;
+        CurrentAmmo--;
+        Fire();
+
+        if (CurrentAmmo <= 0)
+        {
+            TriggerReload();
+            Invoke(nameof(ReloadAmmo), reloadTime);
+        }
+    }
+
+    protected virtual void Fire() { }
+
+    private void ReloadAmmo()
+    {
+        if (!Object.HasStateAuthority) return;
+
+        CurrentAmmo = maxAmmo;
+        isReloading = false;
+    }
+
+    protected void TriggerReload()
+    {
+        if (isReloading) return;
+        isReloading = true;
+        OnReloading?.Invoke(reloadTime);
+    }
+
+    public void ForceReloadNow()
+    {
+        CancelInvoke(nameof(ReloadAmmo));
+        ReloadAmmo();
+    }
 }

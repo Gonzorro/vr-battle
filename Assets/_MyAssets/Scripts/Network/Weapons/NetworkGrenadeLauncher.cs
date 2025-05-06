@@ -1,45 +1,33 @@
-using Fusion;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class NetworkGrenadeLauncher : NetworkGunBase
 {
-    private int currentAmmo;
-    private NetworkObject currentGrenade;
+    private NetworkGrenadeLauncherBullet currentBullet;
 
-    protected override void OnGrabbed(SelectEnterEventArgs args)
+
+    protected override void OnDeactivated(UnityEngine.XR.Interaction.Toolkit.DeactivateEventArgs args) => Ignite();
+
+    protected override void Fire()
     {
-        base.OnGrabbed(args);
-        currentAmmo = maxAmmo;
-    }
+        Quaternion randomRotation = GetRandomQuaternion();
+        var spawnRotation = firePoint.rotation * randomRotation;
 
-    protected override void OnActivated(ActivateEventArgs args)
-    {
-        base.OnActivated(args);
-        TryLaunch();
-    }
+        var grenade = Runner.Spawn(projectilePrefab, firePoint.position, spawnRotation);
 
-    protected override void OnDeactivated(DeactivateEventArgs args) => Explode();
-
-    private void TryLaunch()
-    {
-        if (Time.time - lastFireTime < fireDelay || currentAmmo <= 0) return;
-        lastFireTime = Time.time;
-        currentAmmo--;
-        Fire();
-    }
-
-    private void Fire()
-    {
-        currentGrenade = Runner.Spawn(projectilePrefab, firePoint.position, firePoint.rotation);
-        if (currentGrenade.TryGetComponent<Rigidbody>(out var rb))
+        if (grenade.TryGetComponent<Rigidbody>(out var rb))
             rb.linearVelocity = firePoint.forward * projectileSpeed;
+
+        grenade.TryGetComponent(out currentBullet);
     }
 
-    private void Explode()
+    private void Ignite()
     {
-        if (currentGrenade == null) return;
-        Runner.Despawn(currentGrenade);
-        currentGrenade = null;
+        if (currentBullet == null) return;
+
+        currentBullet.Ignite();
+        currentBullet = null;
     }
+
+    private Quaternion GetRandomQuaternion() =>
+        Quaternion.Euler(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f));
 }

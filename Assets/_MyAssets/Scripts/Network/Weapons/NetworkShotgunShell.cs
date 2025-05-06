@@ -9,18 +9,20 @@ public class NetworkShotgunShell : NetworkBehaviour
 
     private Vector3[] originalPositions;
     private float spawnTime;
+    private bool isReady;
 
-    private void Awake()
+    private void Awake() => SaveOriginalPosition();
+
+    public override void Spawned()
     {
-        originalPositions = new Vector3[pellets.Length];
-        for (int i = 0; i < pellets.Length; i++)
-            originalPositions[i] = pellets[i].localPosition;
+        spawnTime = Time.time;
+        isReady = true;
     }
-
-    public override void Spawned() => spawnTime = Time.time;
 
     private void Update()
     {
+        if (!isReady) return;
+
         float delta = Time.deltaTime;
         foreach (var pellet in pellets)
             pellet.localPosition += delta * spreadSpeed * pellet.localPosition.normalized;
@@ -28,6 +30,13 @@ public class NetworkShotgunShell : NetworkBehaviour
         if (!Object.HasStateAuthority) return;
         if (Time.time - spawnTime > lifetime)
             Runner.Despawn(Object);
+    }
+
+    private void SaveOriginalPosition()
+    {
+        originalPositions = new Vector3[pellets.Length];
+        for (int i = 0; i < pellets.Length; i++)
+            originalPositions[i] = pellets[i].localPosition;
     }
 
     private void OnDisable()
