@@ -5,6 +5,17 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class NetworkGunBase : NetworkBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] protected Transform firePoint;
+    [SerializeField] protected NetworkObject projectilePrefab;
+    [SerializeField] protected int maxAmmo;
+    [SerializeField] protected float fireDelay = 0.5f;
+    [SerializeField] protected float projectileSpeed = 25f;
+    [SerializeField] protected bool isAutomatic = false;
+    [SerializeField] protected bool usePhysicsForce = true;
+
+    protected float lastFireTime;
+
     private XRGrabInteractable grabInteractable;
 
     private void Awake() => grabInteractable = GetComponent<XRGrabInteractable>();
