@@ -3,15 +3,26 @@ using UnityEngine;
 
 public class NetworkShotgunShell : NetworkBehaviour
 {
+    [Header("Pellet Spread")]
     [SerializeField] private Transform[] pellets;
     [SerializeField] private float spreadSpeed = 2f;
     [SerializeField] private float lifetime = 2f;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip fireSound;
 
     private Vector3[] originalPositions;
     private float spawnTime;
     private bool isReady;
 
     private void Awake() => SaveOriginalPosition();
+
+    private void OnEnable()
+    {
+        audioSource.pitch = Random.Range(0.95f, 1.05f);
+        audioSource.PlayOneShot(fireSound);
+    }
 
     public override void Spawned()
     {
