@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 5ac54b5878a60a34fa987c183e84867f, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -416,7 +416,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c25d9cac9413c9e428d18482cd187ae3, type: 2}
+  - {fileID: 2100000, guid: c59502f899a255740b932b33a8950cf4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -651,7 +651,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c25d9cac9413c9e428d18482cd187ae3, type: 2}
+  - {fileID: 2100000, guid: 9f0e7b5cffdbec047beee09e27afaf69, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -955,7 +955,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c25d9cac9413c9e428d18482cd187ae3, type: 2}
+  - {fileID: 2100000, guid: 658183f39a9732542802e13d469c2fe5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -996,6 +996,7 @@ GameObject:
   - component: {fileID: 1217759341}
   - component: {fileID: 1217759340}
   - component: {fileID: 1217759339}
+  - component: {fileID: 1217759342}
   m_Layer: 0
   m_Name: Connection Manager
   m_TagString: Untagged
@@ -1046,6 +1047,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1217759342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217759338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ca316bd6627e947901031d3ba80f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runnerChannel: {fileID: 11400000, guid: df58be4f8a250734f945a7c6e071e5af, type: 2}
+  playerChannel: {fileID: 11400000, guid: 9eae0458eba9ecc4eb459522cfd892b1, type: 2}
+  avatarPrefab: {fileID: 7658010910766659414, guid: 4975df2a6a9a9bc49afb2374f0a49572, type: 3}
 --- !u!1 &1267578649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,7 +1140,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c25d9cac9413c9e428d18482cd187ae3, type: 2}
+  - {fileID: 2100000, guid: c59502f899a255740b932b33a8950cf4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1332,7 +1348,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c25d9cac9413c9e428d18482cd187ae3, type: 2}
+  - {fileID: 2100000, guid: cb16f57443ff7f1478322ad2c7588de1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1584,7 +1600,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c25d9cac9413c9e428d18482cd187ae3, type: 2}
+  - {fileID: 2100000, guid: 9f0e7b5cffdbec047beee09e27afaf69, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2042,6 +2058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430285557170928955}
   - component: {fileID: 430285557170928956}
+  - component: {fileID: 430285557170928957}
   m_Layer: 9
   m_Name: Gorilla Rig
   m_TagString: Untagged
@@ -2084,6 +2101,23 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 430285557076435665}
   m_RequestedTrackingOriginMode: 0
   m_CameraYOffset: 1.1176
+--- !u!114 &430285557170928957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430285557170928953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 894fa99ece23f464293aa34bb8ad8248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerChannel: {fileID: 11400000, guid: 9eae0458eba9ecc4eb459522cfd892b1, type: 2}
+  head: {fileID: 430285557564599317}
+  body: {fileID: 430285556497709311}
+  leftHand: {fileID: 430285556780473521}
+  rightHand: {fileID: 430285557497225027}
 --- !u!1 &430285557497225026
 GameObject:
   m_ObjectHideFlags: 0
