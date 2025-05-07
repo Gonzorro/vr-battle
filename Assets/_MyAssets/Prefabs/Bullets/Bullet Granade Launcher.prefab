@@ -135,15 +135,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9562d83f3ba15cb40869a3b6f2517f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 3
   damage: 10
+  audioSource: {fileID: 6288469031759022701}
+  fireSound: {fileID: 8300000, guid: 4286634c58f07ef4d822a8d364682d35, type: 3}
   visuals: {fileID: 7964186299757521345}
+  bulletCollider: {fileID: 2442991245463060947}
+  environmentLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
   pinRigidbody: {fileID: 4795344525787686587}
   pinOriginalParent: {fileID: 7966867221211559007}
-  audioSource: {fileID: 6288469031759022701}
-  launchClip: {fileID: 8300000, guid: 4286634c58f07ef4d822a8d364682d35, type: 3}
   pinClip: {fileID: 8300000, guid: 2672012e221ec5641ada15c9bfda8edf, type: 3}
-  vfxHandler: {fileID: 0}
-  muzzleFx: {fileID: 7549963177349647151, guid: ead1881a750a30448b023dbc9e5ea95f, type: 3}
 --- !u!82 &6288469031759022701
 AudioSource:
   m_ObjectHideFlags: 0

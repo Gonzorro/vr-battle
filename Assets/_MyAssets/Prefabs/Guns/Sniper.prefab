@@ -235,11 +235,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 7463797785356637624}
+  fireDelay: 0.5
+  projectileSpeed: 50
   projectilePrefab: {fileID: 6601664530609889394, guid: 7b42e2ce190d18f499793d72d4d1287b, type: 3}
   maxAmmo: 5
-  fireDelay: 0.5
-  reloadTime: 1
-  projectileSpeed: 50
+  reloadTime: 3
+  emptyMagClip: {fileID: 0}
 --- !u!54 &1385512655429297585
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -975,6 +976,26 @@ PrefabInstance:
     - target: {fileID: 3526399391609780333, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551657480259149455, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.726
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551657480259149455, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.726
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551657480259149455, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.726
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551657480259149455, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551657480259149455, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0929
       objectReference: {fileID: 0}
     - target: {fileID: 4811661810474103561, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
       propertyPath: reloadImage

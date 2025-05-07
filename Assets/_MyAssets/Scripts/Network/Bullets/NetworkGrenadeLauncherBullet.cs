@@ -2,19 +2,11 @@ using Fusion;
 using UnityEngine;
 using System.Collections;
 
-public class NetworkGrenadeLauncherBullet : NetworkBehaviour
+public class NetworkGrenadeLauncherBullet : NetworkBulletBase
 {
-    [Header("Bullet Settings")]
-    [SerializeField] private float damage = 10f;
-
-    [Header("References")]
-    [SerializeField] private GameObject visuals;
+    [Header("Pin References")]
     [SerializeField] private Rigidbody pinRigidbody;
     [SerializeField] private Transform pinOriginalParent;
-
-    [Header("Audio")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip launchClip;
     [SerializeField] private AudioClip pinClip;
 
     private Vector3 pinLocalPosition;
@@ -31,13 +23,6 @@ public class NetworkGrenadeLauncherBullet : NetworkBehaviour
     }
 
     private void OnDisable() => RestorePin();
-
-    private void OnEnable()
-    {
-        audioSource.pitch = Random.Range(0.95f, 1.05f);
-        audioSource.PlayOneShot(launchClip);
-        visuals.SetActive(true);
-    }
 
     public void Ignite()
     {
@@ -57,9 +42,9 @@ public class NetworkGrenadeLauncherBullet : NetworkBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        ParticleManager.Instance.Play(ParticleType.LauncherExplosion, gameObject.transform.position);
+        ParticleManager.Instance.Play(ParticleType.LauncherExplosion, transform.position);
         IsIgniting = false;
-        visuals.SetActive(false);
+        ToggleVisualsAndCollider(false);
 
         yield return new WaitForSeconds(2f);
         if (Object.HasStateAuthority)
@@ -70,7 +55,7 @@ public class NetworkGrenadeLauncherBullet : NetworkBehaviour
     {
         if (!pinRigidbody) return;
 
-        audioSource.PlayOneShot(pinClip);
+        PlayClip(pinClip, audioSource, 1f, 1f);
 
         pinRigidbody.transform.SetParent(null);
         pinRigidbody.isKinematic = false;

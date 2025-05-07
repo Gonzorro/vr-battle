@@ -116,11 +116,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 8858430338921718856}
+  fireDelay: 0.8
+  projectileSpeed: 16
   projectilePrefab: {fileID: 352221350105058923, guid: d470c497c1d0f474a80355e34baf8fda, type: 3}
-  maxAmmo: 6
-  fireDelay: 0.5
-  reloadTime: 1
-  projectileSpeed: 14
+  maxAmmo: 5
+  reloadTime: 2
+  emptyMagClip: {fileID: 0}
 --- !u!54 &8532678044098131875
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_Colliders:
   - {fileID: 4867006591271176718}
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 2
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -652,6 +653,14 @@ PrefabInstance:
     - target: {fileID: 3526399391609780333, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551657480259149455, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551657480259149455, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0955
       objectReference: {fileID: 0}
     - target: {fileID: 4811661810474103561, guid: 66a8bad212f409d4189fadb1bcce6dae, type: 3}
       propertyPath: networkGunBase

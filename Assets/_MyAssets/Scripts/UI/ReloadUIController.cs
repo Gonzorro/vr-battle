@@ -1,25 +1,62 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class ReloadUIController : MonoBehaviour
 {
-    [Header("References")]
+    [Header("XR & Gun References")]
+    [SerializeField] private XRGrabInteractable xRGrabInteractable;
     [SerializeField] private NetworkGunBase networkGunBase;
+
+    [Header("UI Components")]
     [SerializeField] private Image reloadImage;
+    [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private GameObject ammoPanel;
+
+    [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] reloadClips;
+
 
     private Coroutine reloadRoutine;
 
     private void Awake()
     {
+        xRGrabInteractable.selectEntered.AddListener(OnSelectEntered);
+        xRGrabInteractable.selectExited.AddListener(OnSelectExited);
+
         networkGunBase.OnReloading += OnReloading;
-        SetAlpha(0);
+        networkGunBase.OnAmmoChanged += UpdateAmmoText;
     }
 
-    private void OnDestroy() => networkGunBase.OnReloading -= OnReloading;
+    private void Start() => Init();
 
+    private void OnDestroy()
+    {
+        xRGrabInteractable.selectEntered.RemoveListener(OnSelectEntered);
+        xRGrabInteractable.selectExited.RemoveListener(OnSelectExited);
+
+        networkGunBase.OnReloading -= OnReloading;
+        networkGunBase.OnAmmoChanged -= UpdateAmmoText;
+    }
+
+    private void OnSelectEntered(SelectEnterEventArgs arg0)
+    {
+        UpdateAmmoText(networkGunBase.CurrentAmmo, networkGunBase.MaxAmmo);
+        ammoPanel.SetActive(true);
+    }
+
+    private void OnSelectExited(SelectExitEventArgs arg0) => ammoPanel.SetActive(false);
+
+    private void Init()
+    {
+        SetAlpha(0);
+        UpdateAmmoText(networkGunBase.MaxAmmo, networkGunBase.MaxAmmo);
+        ammoPanel.SetActive(false);
+    }
     private void OnReloading(float delay)
     {
         if (reloadRoutine != null)
@@ -58,8 +95,6 @@ public class ReloadUIController : MonoBehaviour
 
     private void PlayReloadSound(float reloadDuration)
     {
-        if (reloadClips.Length == 0 || audioSource == null) return;
-
         var clip = reloadClips[Random.Range(0, reloadClips.Length)];
 
         float pitch = clip.length > 0f ? clip.length / reloadDuration : 1f;
@@ -88,5 +123,11 @@ public class ReloadUIController : MonoBehaviour
         Color c = reloadImage.color;
         c.a = alpha;
         reloadImage.color = c;
+    }
+
+    private void UpdateAmmoText(int current, int max)
+    {
+        string currentText = current == 0 ? $"<color=red>{current}</color>" : current.ToString();
+        ammoText.text = $"{currentText} / {max}";
     }
 }

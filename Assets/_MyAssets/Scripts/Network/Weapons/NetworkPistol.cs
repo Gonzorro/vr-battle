@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NetworkRevolver : NetworkGunBase
+public class NetworkPistol : NetworkGunBase
 {
     protected override void Fire()
     {

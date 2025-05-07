@@ -1,59 +1,60 @@
-using Fusion;
 using UnityEngine;
 
-public class NetworkShotgunShell : NetworkBehaviour
+public class NetworkShotgunShell : NetworkBulletBase
 {
     [Header("Pellet Spread")]
     [SerializeField] private Transform[] pellets;
     [SerializeField] private float spreadSpeed = 2f;
-    [SerializeField] private float lifetime = 2f;
-
-    [Header("Audio")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip fireSound;
 
     private Vector3[] originalPositions;
     private float spawnTime;
-    private bool isReady;
 
-    private void Awake() => SaveOriginalPosition();
+    private void Awake() => SaveOriginalPositions();
 
-    private void OnEnable()
-    {
-        audioSource.pitch = Random.Range(0.95f, 1.05f);
-        audioSource.PlayOneShot(fireSound);
-    }
+    protected override void OnEnable() => base.OnEnable();
 
     public override void Spawned()
     {
+        base.Spawned();
         spawnTime = Time.time;
-        isReady = true;
     }
 
-    private void Update()
+    private void OnDisable() => SetToOriginalPosition();
+
+    protected override void Update()
     {
-        if (!isReady) return;
+        base.Update();
 
         float delta = Time.deltaTime;
         foreach (var pellet in pellets)
             pellet.localPosition += delta * spreadSpeed * pellet.localPosition.normalized;
 
-        if (!Object.HasStateAuthority) return;
-        if (Time.time - spawnTime > lifetime)
+        if (!isReady && !Object.HasStateAuthority) return;
+        if (Time.time - spawnTime > lifeTime)
             Runner.Despawn(Object);
     }
 
-    private void SaveOriginalPosition()
+    private void SaveOriginalPositions()
     {
         originalPositions = new Vector3[pellets.Length];
         for (int i = 0; i < pellets.Length; i++)
             originalPositions[i] = pellets[i].localPosition;
     }
 
-    private void OnDisable()
+    private void SetToOriginalPosition()
     {
         if (originalPositions == null || pellets == null) return;
         for (int i = 0; i < pellets.Length; i++)
             pellets[i].localPosition = originalPositions[i];
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!Object.HasStateAuthority) return;
+
+        int otherLayer = 1 << collision.gameObject.layer;
+
+        if ((environmentLayer | playerLayer & otherLayer) != 0)
+            Runner.Despawn(Object);
     }
 }

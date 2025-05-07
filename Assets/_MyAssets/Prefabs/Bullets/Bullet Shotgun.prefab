@@ -1218,6 +1218,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832f925dccb58c244a7492c219395e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 3
+  damage: 10
+  audioSource: {fileID: 3110942515093629240}
+  fireSound: {fileID: 8300000, guid: 86819ce1a3a566e4d905d17cb24ecdbf, type: 3}
+  visuals: {fileID: 3920960512218856258}
+  bulletCollider: {fileID: 2781049335252267983}
+  environmentLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
   pellets:
   - {fileID: 262553724339661414}
   - {fileID: 1346733384414211131}
@@ -1229,6 +1241,9 @@ MonoBehaviour:
   - {fileID: 762057470102181922}
   - {fileID: 5689503642457017483}
   - {fileID: 811577668594714281}
+  - {fileID: 436153709888259056}
+  - {fileID: 8374525861583491891}
+  - {fileID: 6870392815676858744}
   - {fileID: 1121891220764592366}
   - {fileID: 4965752273862195526}
   - {fileID: 1978812760005995221}
@@ -1236,9 +1251,6 @@ MonoBehaviour:
   - {fileID: 1692693600267869823}
   - {fileID: 3179661754664244475}
   spreadSpeed: 12
-  lifetime: 0.5
-  audioSource: {fileID: 3110942515093629240}
-  fireSound: {fileID: 8300000, guid: 86819ce1a3a566e4d905d17cb24ecdbf, type: 3}
 --- !u!135 &2781049335252267983
 SphereCollider:
   m_ObjectHideFlags: 0
