@@ -1,69 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TargetScript : MonoBehaviour {
+public class TargetScript : MonoBehaviour
+{
+    [Header("Customizable Options")]
+    [SerializeField] private float minTime;
+    [SerializeField] private float maxTime;
 
-	float randomTime;
-	bool routineStarted = false;
+    [Header("Audio")]
+    [SerializeField] private AudioClip upSound;
+    [SerializeField] private AudioClip downSound;
+    [SerializeField] private AudioSource audioSource;
 
-	//Used to check if the target has been hit
-	public bool isHit = false;
+    [Header("Animations")]
+    [SerializeField] private AnimationClip targetUp;
+    [SerializeField] private AnimationClip targetDown;
 
-	[Header("Customizable Options")]
-	//Minimum time before the target goes back up
-	public float minTime;
-	//Maximum time before the target goes back up
-	public float maxTime;
+    [Header("Bullet Layer")]
+    [SerializeField] private LayerMask bulletLayer;
 
-	[Header("Audio")]
-	public AudioClip upSound;
-	public AudioClip downSound;
+    private float randomTime;
+    private bool routineStarted;
+    private bool isHit;
 
-	[Header("Animations")]
-	public AnimationClip targetUp;
-	public AnimationClip targetDown;
+    public bool IsHit { get => isHit; set => isHit = value; }
 
-	public AudioSource audioSource;
-	
-	private void Update () {
-		
-		//Generate random time based on min and max time values
-		randomTime = Random.Range (minTime, maxTime);
+    private void Update()
+    {
+        if (!isHit || routineStarted) return;
 
-		//If the target is hit
-		if (isHit == true) 
-		{
-			if (routineStarted == false) 
-			{
-				//Animate the target "down"
-				gameObject.GetComponent<Animation>().clip = targetDown;
-				gameObject.GetComponent<Animation>().Play();
+        randomTime = Random.Range(minTime, maxTime);
+        GetComponent<Animation>().clip = targetDown;
+        GetComponent<Animation>().Play();
 
-				//Set the downSound as current sound, and play it
-				audioSource.GetComponent<AudioSource>().clip = downSound;
-				audioSource.Play();
+        audioSource.clip = downSound;
+        audioSource.Play();
 
-				//Start the timer
-				StartCoroutine(DelayTimer());
-				routineStarted = true;
-			} 
-		}
-	}
+        StartCoroutine(DelayTimer());
+        routineStarted = true;
+    }
 
-	//Time before the target pops back up
-	private IEnumerator DelayTimer () {
-		//Wait for random amount of time
-		yield return new WaitForSeconds(randomTime);
-		//Animate the target "up" 
-		gameObject.GetComponent<Animation>().clip = targetUp;
-		gameObject.GetComponent<Animation>().Play();
+    private IEnumerator DelayTimer()
+    {
+        yield return new WaitForSeconds(randomTime);
+        GetComponent<Animation>().clip = targetUp;
+        GetComponent<Animation>().Play();
 
-		//Set the upSound as current sound, and play it
-		audioSource.GetComponent<AudioSource>().clip = upSound;
-		audioSource.Play();
+        audioSource.clip = upSound;
+        audioSource.Play();
 
-		//Target is no longer hit
-		isHit = false;
-		routineStarted = false;
-	}
+        isHit = false;
+        routineStarted = false;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if ((bulletLayer.value & (1 << other.gameObject.layer)) != 0)
+            isHit = true;
+    }
 }

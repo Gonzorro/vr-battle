@@ -51,15 +51,11 @@ public class NetworkGunBase : NetworkBehaviour
         grabInteractable.deactivated.RemoveListener(OnDeactivated);
     }
 
-    protected virtual void OnGrabbed(SelectEnterEventArgs args) => Debug.Log($"[NetworkGunBase] Grabbed by {args.interactorObject}");
-    protected virtual void OnReleased(SelectExitEventArgs args) => Debug.Log($"[NetworkGunBase] Released by {args.interactorObject}");
-    protected virtual void OnActivated(ActivateEventArgs args)
-    {
-        Debug.Log($"[NetworkGunBase] Activated by {args.interactorObject}");
-        TryFire();
-    }
+    protected virtual void OnGrabbed(SelectEnterEventArgs args) {}
+    protected virtual void OnReleased(SelectExitEventArgs args) {}
+    protected virtual void OnActivated(ActivateEventArgs args) => TryFire();
 
-    protected virtual void OnDeactivated(DeactivateEventArgs args) => Debug.Log($"[NetworkGunBase] Deactivated by {args.interactorObject}");
+    protected virtual void OnDeactivated(DeactivateEventArgs args) {}
 
     protected void TryFire()
     {

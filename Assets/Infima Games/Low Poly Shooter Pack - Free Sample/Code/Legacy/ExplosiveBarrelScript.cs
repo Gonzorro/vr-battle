@@ -73,7 +73,7 @@ public class ExplosiveBarrelScript : MonoBehaviour {
 			if (hit.transform.tag == "Target") 
 			{
 				//Toggle the isHit bool on the target object
-				hit.transform.gameObject.GetComponent<TargetScript>().isHit = true;
+				//hit.transform.gameObject.GetComponent<TargetScript>().isHit = true;
 			}
 
 			//If the explosion hit the tag "GasTank"

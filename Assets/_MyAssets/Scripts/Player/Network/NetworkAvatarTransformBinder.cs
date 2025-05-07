@@ -12,9 +12,6 @@ public class NetworkAvatarTransformBinder : NetworkBehaviour
     [SerializeField] private Transform leftHand;
     [SerializeField] private Transform rightHand;
 
-    [Header("Transform Offset")]
-    [SerializeField] private Vector3 positionOffset;
-
     private void Start()
     {
         if (!Object.HasStateAuthority) return;

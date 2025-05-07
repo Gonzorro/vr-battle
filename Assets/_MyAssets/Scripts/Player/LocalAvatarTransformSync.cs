@@ -11,6 +11,12 @@ public class LocalAvatarTransformSync : MonoBehaviour
     [SerializeField] private Transform rightHand;
     [SerializeField] private Transform body;
 
+    [Header("Position Offsets")]
+    [SerializeField] private Vector3 headPositionOffset;
+    [SerializeField] private Vector3 leftHandPositionOffset;
+    [SerializeField] private Vector3 rightHandPositionOffset;
+    [SerializeField] private Vector3 bodyPositionOffset;
+
     private Transform networkHeadTransform;
     private Transform networkLeftHandTransform;
     private Transform networkRightHandTransform;
@@ -35,9 +41,9 @@ public class LocalAvatarTransformSync : MonoBehaviour
     {
         if (!isReady) return;
 
-        networkHeadTransform.SetPositionAndRotation(head.position, head.rotation);
-        networkLeftHandTransform.SetPositionAndRotation(leftHand.position, leftHand.rotation);
-        networkRightHandTransform.SetPositionAndRotation(rightHand.position, rightHand.rotation);
-        networkBodyTransform.SetPositionAndRotation(body.position, body.rotation);
+        networkHeadTransform.SetPositionAndRotation(head.position + headPositionOffset, head.rotation);
+        networkLeftHandTransform.SetPositionAndRotation(leftHand.position + leftHandPositionOffset, leftHand.rotation);
+        networkRightHandTransform.SetPositionAndRotation(rightHand.position + rightHandPositionOffset, rightHand.rotation);
+        networkBodyTransform.SetPositionAndRotation(body.position + bodyPositionOffset, body.rotation);
     }
 }

@@ -150,6 +150,10 @@ MonoBehaviour:
   pinRigidbody: {fileID: 4795344525787686587}
   pinOriginalParent: {fileID: 7966867221211559007}
   pinClip: {fileID: 8300000, guid: 2672012e221ec5641ada15c9bfda8edf, type: 3}
+  collisionCheckMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  collisionCheckRadius: 0.5
 --- !u!82 &6288469031759022701
 AudioSource:
   m_ObjectHideFlags: 0

@@ -149,17 +149,17 @@ public class ProjectileScript : MonoBehaviour {
 			Quaternion.LookRotation(collision.contacts[0].normal));
 
 		//If the projectile hit the tag "Target", and if "isHit" is false
-		if (collision.gameObject.tag == "Target" && 
-		    	collision.gameObject.GetComponent<TargetScript>().isHit == false) {
+		//if (collision.gameObject.tag == "Target" && 
+		//    	collision.gameObject.GetComponent<TargetScript>().isHit == false) {
 			
-			//Spawn explosion prefab on surface
-			Instantiate(explosionPrefab,collision.contacts[0].point,
-			            Quaternion.LookRotation(collision.contacts[0].normal));
+		//	//Spawn explosion prefab on surface
+		//	Instantiate(explosionPrefab,collision.contacts[0].point,
+		//	            Quaternion.LookRotation(collision.contacts[0].normal));
 
-			//Toggle the isHit bool on the target object
-			collision.gameObject.transform.gameObject.GetComponent
-				<TargetScript>().isHit = true;
-		}
+		//	//Toggle the isHit bool on the target object
+		//	collision.gameObject.transform.gameObject.GetComponent
+		//		<TargetScript>().isHit = true;
+		//}
 
 		//Explosion force
 		Vector3 explosionPos = transform.position;
@@ -177,13 +177,13 @@ public class ProjectileScript : MonoBehaviour {
 			if (rb != null)
 				rb.AddExplosionForce (power * 50, explosionPos, radius, 3.0F);
 
-			//If the explosion hit the tags "Target", and "isHit" is false
-			if (hit.GetComponent<Collider>().tag == "Target" && 
-			    	hit.GetComponent<TargetScript>().isHit == false) {
+			////If the explosion hit the tags "Target", and "isHit" is false
+			//if (hit.GetComponent<Collider>().tag == "Target" && 
+			//    	hit.GetComponent<TargetScript>().isHit == false) {
 
-				//Toggle the isHit bool on the target object
-				hit.gameObject.GetComponent<TargetScript>().isHit = true;
-			}
+			//	//Toggle the isHit bool on the target object
+			//	hit.gameObject.GetComponent<TargetScript>().isHit = true;
+			//}
 
 			//If the projectile explosion hits barrels with the tag "ExplosiveBarrel"
 			if (hit.transform.tag == "ExplosiveBarrel") {

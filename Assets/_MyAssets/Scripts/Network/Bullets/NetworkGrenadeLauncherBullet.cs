@@ -9,9 +9,15 @@ public class NetworkGrenadeLauncherBullet : NetworkBulletBase
     [SerializeField] private Transform pinOriginalParent;
     [SerializeField] private AudioClip pinClip;
 
+    [Header("Explosion Collision Check")]
+    [SerializeField] private LayerMask collisionCheckMask;
+    [SerializeField] private float collisionCheckRadius = 20f;
+
     private Vector3 pinLocalPosition;
     private Quaternion pinLocalRotation;
     private Vector3 pinLocalScale;
+
+    private readonly Collider[] _overlapHits = new Collider[10];
 
     [Networked, OnChangedRender(nameof(OnIsIgnitingChanged))] private NetworkBool IsIgniting { get; set; }
 
@@ -43,6 +49,8 @@ public class NetworkGrenadeLauncherBullet : NetworkBulletBase
         yield return new WaitForSeconds(1f);
 
         ParticleManager.Instance.Play(ParticleType.LauncherExplosion, transform.position);
+       // CheckRadiusForLayer();
+
         IsIgniting = false;
         ToggleVisualsAndCollider(false);
 
@@ -50,6 +58,24 @@ public class NetworkGrenadeLauncherBullet : NetworkBulletBase
         if (Object.HasStateAuthority)
             Runner.Despawn(Object);
     }
+
+    //TODO not working
+    private void CheckRadiusForLayer()
+    {
+        int count = Physics.OverlapSphereNonAlloc(transform.position, collisionCheckRadius, _overlapHits, collisionCheckMask);
+
+        for (int i = 0; i < count; i++)
+        {
+            var hit = _overlapHits[i];
+            Debug.LogError(hit.gameObject.name);
+
+            if ((collisionCheckMask.value & (1 << hit.gameObject.layer)) == 0) continue;
+
+            if (hit.TryGetComponent<TargetScript>(out var target))
+                target.IsHit = true;
+        }
+    }
+
 
     private void ReleasePin()
     {
