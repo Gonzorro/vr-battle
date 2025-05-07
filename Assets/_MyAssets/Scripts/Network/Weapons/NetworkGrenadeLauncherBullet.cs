@@ -17,10 +17,6 @@ public class NetworkGrenadeLauncherBullet : NetworkBehaviour
     [SerializeField] private AudioClip launchClip;
     [SerializeField] private AudioClip pinClip;
 
-    [Header("VFX")]
-    [SerializeField] private GrenadeVFXHandler vfxHandler;
-    [SerializeField] private ParticleSystem muzzleFx;
-
     private Vector3 pinLocalPosition;
     private Quaternion pinLocalRotation;
     private Vector3 pinLocalScale;
@@ -34,17 +30,12 @@ public class NetworkGrenadeLauncherBullet : NetworkBehaviour
         pinLocalScale = pinRigidbody.transform.localScale;
     }
 
-    private void OnDisable()
-    {
-        RestorePin();
-        muzzleFx.Stop();
-    }
+    private void OnDisable() => RestorePin();
 
     private void OnEnable()
     {
         audioSource.pitch = Random.Range(0.95f, 1.05f);
         audioSource.PlayOneShot(launchClip);
-        muzzleFx.Play();
         visuals.SetActive(true);
     }
 
@@ -66,7 +57,7 @@ public class NetworkGrenadeLauncherBullet : NetworkBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        vfxHandler.PlayAndDetach();
+        ParticleManager.Instance.Play(ParticleType.LauncherExplosion, gameObject.transform.position);
         IsIgniting = false;
         visuals.SetActive(false);
 
