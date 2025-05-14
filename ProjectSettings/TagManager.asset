@@ -25,9 +25,9 @@ TagManager:
   - Player
   - Props
   - Target
-  - 
-  - 
-  - 
+  - Flag
+  - CaptureZone
+  - NetworkPlayer
   - 
   - 
   - 
