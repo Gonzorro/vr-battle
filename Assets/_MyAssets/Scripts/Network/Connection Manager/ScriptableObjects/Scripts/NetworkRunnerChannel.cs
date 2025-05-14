@@ -38,4 +38,7 @@ public class NetworkRunnerChannel : ScriptableObject
 
     public void InvokeOnServerShutdown(NetworkRunner runner, ShutdownReason reason) =>
         OnServerShutdown?.Invoke(runner, reason);
+
+    public Func<PlayerRef?> RequestMasterClientPlayerRef;
+
 }

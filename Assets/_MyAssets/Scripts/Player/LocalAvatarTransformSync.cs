@@ -24,9 +24,17 @@ public class LocalAvatarTransformSync : MonoBehaviour
 
     private bool isReady;
 
-    private void Awake() => playerChannel.OnPlayerNetworkTransformsReady += OnPlayerNetworkTransformsReady;
+    private void Awake()
+    {
+        playerChannel.OnPlayerNetworkTransformsReady += OnPlayerNetworkTransformsReady;
+        playerChannel.OnPlayerDeath += OnPlayerDeath;
+    }
 
-    private void OnDestroy() => playerChannel.OnPlayerNetworkTransformsReady -= OnPlayerNetworkTransformsReady;
+    private void OnDestroy()
+    {
+        playerChannel.OnPlayerNetworkTransformsReady -= OnPlayerNetworkTransformsReady;
+        playerChannel.OnPlayerDeath -= OnPlayerDeath;
+    }
 
     private void OnPlayerNetworkTransformsReady(PlayerNetworkTransforms transforms)
     {
@@ -36,6 +44,8 @@ public class LocalAvatarTransformSync : MonoBehaviour
         networkBodyTransform = transforms.Body;
         isReady = true;
     }
+
+    private void OnPlayerDeath() => isReady = false;
 
     private void Update()
     {
