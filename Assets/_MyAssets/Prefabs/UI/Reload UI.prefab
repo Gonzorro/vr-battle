@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 6632211576046509516}
   - component: {fileID: 5880456251145319837}
   - component: {fileID: 6949934972955955958}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 3207713877348748116}
   - component: {fileID: 6833509936027989539}
   - component: {fileID: 6787760829154649147}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 3551657480259149455}
   - component: {fileID: 7538879867667129667}
   - component: {fileID: 7287544598055630334}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 2936097624043195927}
   - component: {fileID: 707575709943900142}
   - component: {fileID: 3089516952955162161}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

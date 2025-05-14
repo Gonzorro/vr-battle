@@ -6,7 +6,7 @@ public abstract class NetworkBulletBase : NetworkBehaviour
 {
     [Header("Common Settings")]
     [SerializeField] protected float lifeTime = 3f;
-    [SerializeField] protected float damage = 10f;
+    [SerializeField] private int damage = 10;
 
     [Header("Audio")]
     [SerializeField] protected AudioSource audioSource;
@@ -22,6 +22,8 @@ public abstract class NetworkBulletBase : NetworkBehaviour
 
     private float despawnTime;
     protected bool isReady;
+
+    public int Damage { get => damage; set => damage = value; }
 
     public override void Spawned()
     {

@@ -28,7 +28,7 @@ TagManager:
   - Flag
   - CaptureZone
   - NetworkPlayer
-  - 
+  - Hands
   - 
   - 
   - 
@@ -48,6 +48,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: OverlayUI
+    uniqueID: 2286040453
     locked: 0
   m_RenderingLayers:
   - Default
